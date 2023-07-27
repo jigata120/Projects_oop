@@ -62,3 +62,23 @@ Create an online marketplace system that allows users to buy and sell products. 
 
 Remember, this is an advanced project, and it may require considerable time and effort to complete.
 '''
+
+
+class User:
+    users = {}
+    def __init__(self, username, password, email, role ):
+        self.user_id = None
+        self.username =username
+        self.password = password
+        self.email = email
+        self.role = role
+    def __repr__(self):
+        return f'{self.username}(obj)-{self.role}'
+    @classmethod
+    def register_user(cls,username, password, email, role ):
+        user_object = User(username, password, email, role )
+        User.users[username]= user_object
+        return user_object
+
+print(User.register_user('Koko','kokodzhi','k0koloko@gmail.com','seler'))
+print(User.users)
