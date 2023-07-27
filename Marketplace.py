@@ -66,19 +66,60 @@ Remember, this is an advanced project, and it may require considerable time and 
 
 class User:
     users = {}
-    def __init__(self, username, password, email, role ):
+
+    def __init__(self, username, password, email, role):
         self.user_id = None
-        self.username =username
+        self.username = username
         self.password = password
         self.email = email
         self.role = role
+
     def __repr__(self):
-        return f'{self.username}(obj)-{self.role}'
+        return f'(obj|{self.username}|{self.role})'
+
     @classmethod
-    def register_user(cls,username, password, email, role ):
-        user_object = User(username, password, email, role )
-        User.users[username]= user_object
+    def register_user(cls, username, password, email, role):
+        user_object = User(username, password, email, role)
+        User.users[username] = user_object
         return user_object
 
-print(User.register_user('Koko','kokodzhi','k0koloko@gmail.com','seler'))
+    @classmethod
+    def login_user(cls):
+        pass
+
+
+class Product:
+    products = {}
+
+    def __init__(self, name, description, price, quantity):
+        self.product_id = None
+        self.name = name
+        self.description = description
+        self.price = price
+        self.quantity = quantity
+        self.seller_id = None
+
+    def __repr__(self):
+        return f'[obj|{self.name}|{self.quantity}]'
+
+    @classmethod
+    def register_prodict(cls, name, description, price, quantity):
+        product_object = Product(name, description, price, quantity)
+        Product.products[name] = product_object
+        return product_object
+
+    @classmethod
+    def restock_product(cls, product_name, quantity):
+        product_object = Product.products[product_name]
+        product_object.quantity += quantity
+        return f'{product_name} {product_object.quantity-quantity} -> {product_object.quantity}'
+
+
+print(User.register_user('Koko', 'kokodzhi', 'k0koloko@gmail.com', 'seller'))
 print(User.users)
+print(Product.register_prodict('table', 'table for kitchen', 121, 14))
+print(Product.products)
+print(Product.register_prodict('falcon', 'falcon for painting', 31.49, 75))
+print(Product.products)
+print(Product.restock_product('table', 16))
+print(Product.products)
