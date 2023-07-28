@@ -1,5 +1,4 @@
-'''
-Sure! Here's an advanced OOP project idea in Python that will involve multiple techniques and features:
+'''Sure! Here's an advanced OOP project idea in Python that will involve multiple techniques and features:
 
 **Project Title: Online Marketplace**
 
@@ -29,7 +28,7 @@ Create an online marketplace system that allows users to buy and sell products. 
    - Implement a payment gateway (you can use a test payment gateway for simulation).
 
 6. **Data Persistence:**
-   - Use a database (e.g., SQLite, Postgre SQL, or MySQL) to store user information, products, and orders.
+   - Use a database (e.g., SQLite, PostgreSQL, or MySQL) to store user information, products, and orders.
 
 7. **Search and Filtering:**
    - Implement search functionality for products based on name, category, or price range.
@@ -117,19 +116,10 @@ class Product:
 
 
 class Cart(Product):
-    def __init__(self):
-        self.cart_id = 0
-        self.buyer_id = 0
-        self.items = {}
-
-    def add_to_the_cart(self, product):
-        self.items[product] = product
-
-    def __repr__(self):
-        cart_list = [f'{item.name} - {item.price}' for item in self.items]
-        str = "\n".join(cart_list)
-        cart_price = sum([item.price for item in self.items])
-        return f'{str}\n________\n{cart_price}'
+    def __init__(self, cart_id, buyer_id, items):
+        self.cart_id = cart_id
+        self.buyer_id = buyer_id
+        self.items = items
 
 
 class Order(Cart):
@@ -140,14 +130,3 @@ class Order(Cart):
         self.total_amount = total_amount
         self.status = status
         self.timestamp = timestamp
-
-
-print()
-
-print(Product.register_prodict('falcon', 'falcon for painting', 31.49, 75))
-print(Product.products)
-cart = Cart()
-cart.add_to_the_cart(Product.register_prodict('table', 'table for kitchen', 121, 14))
-
-cart.add_to_the_cart(Product.register_prodict('falcon', 'falcon for painting', 31.49, 75))
-print(cart)
