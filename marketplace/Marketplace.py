@@ -144,10 +144,11 @@ class Order(Cart):
 
 
 
-Product.register_prodict('falcon', 'falcon for painting', 31.49, 75)
-print(Product.products)
+
+
 cart = Cart()
 cart.add_to_the_cart(Product.register_prodict('table', 'table for kitchen', 121, 14))
 
 cart.add_to_the_cart(Product.register_prodict('falcon', 'falcon for painting', 31.49, 75))
+print(Product.products)
 print(cart)
