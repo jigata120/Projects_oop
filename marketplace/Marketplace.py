@@ -116,10 +116,18 @@ class Product:
 
 
 class Cart(Product):
-    def __init__(self, cart_id, buyer_id, items):
-        self.cart_id = cart_id
-        self.buyer_id = buyer_id
-        self.items = items
+    def __init__(self):
+        self.cart_id = 0
+        self.buyer_id = 0
+        self.items = {}
+
+    def add_to_the_cart(self, product):
+        self.items[product] = product
+
+    def __repr__(self):
+        cart = [f'{item.name} - {item.price}' for item in self.items]
+        str = "\n".join(cart)
+        return f'{str}'
 
 
 class Order(Cart):
@@ -130,3 +138,14 @@ class Order(Cart):
         self.total_amount = total_amount
         self.status = status
         self.timestamp = timestamp
+
+
+print()
+
+print(Product.register_prodict('falcon', 'falcon for painting', 31.49, 75))
+print(Product.products)
+cart = Cart()
+cart.add_to_the_cart(Product.register_prodict('table', 'table for kitchen', 121, 14))
+
+cart.add_to_the_cart(Product.register_prodict('falcon', 'falcon for painting', 31.49, 75))
+print(cart)
