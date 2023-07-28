@@ -115,11 +115,4 @@ class Product:
         return f'{product_name} {product_object.quantity-quantity} -> {product_object.quantity}'
 
 
-print(User.register_user('Koko', 'kokodzhi', 'k0koloko@gmail.com', 'seller'))
-print(User.users)
-print(Product.register_prodict('table', 'table for kitchen', 121, 14))
-print(Product.products)
-print(Product.register_prodict('falcon', 'falcon for painting', 31.49, 75))
-print(Product.products)
-print(Product.restock_product('table', 16))
-print(Product.products)
+
