@@ -112,7 +112,21 @@ class Product:
     def restock_product(cls, product_name, quantity):
         product_object = Product.products[product_name]
         product_object.quantity += quantity
-        return f'{product_name} {product_object.quantity-quantity} -> {product_object.quantity}'
+        return f'{product_name} {product_object.quantity - quantity} -> {product_object.quantity}'
 
 
+class Cart(Product):
+    def __init__(self, cart_id, buyer_id, items):
+        self.cart_id = cart_id
+        self.buyer_id = buyer_id
+        self.items = items
 
+
+class Order(Cart):
+    def __init__(self, order_id, buyer_id, items, total_amount, status, timestamp):
+        self.order_id = order_id
+        self.buyer_id = buyer_id
+        self.items = items
+        self.total_amount = total_amount
+        self.status = status
+        self.timestamp = timestamp
