@@ -94,11 +94,50 @@ books_available = lib.books_available
 
 # Function to display available commands and retrieve user input.
 def display_commands():
-    ...
+    print('commands: \nshow (|view all books|)\npatrons (|view all patrons|)')
+    print('instock(|show all available|)\noutstock(|show all unavailable|)')
+    print('add (|add a book|)\nregister(|register a patron|)\nget (|check out a book|)')
+    print('return (|return a book|)')
+    command = input('command: ')
+    print()
+    return command
 
 # The main function to run the library management system.
+
 def main():
-    ...
+    print('Wellcome to the library!  ')
+    # print("Register to continue")
+    # name = input("Name:")
+    # lib.register_patron(name, (ord(name[0]) + len(name)))
+    command = display_commands()
+    while command != 'exit':
+        if command == "show":
+            print('Books: ')
+            for book in books:
+                print(book)
+        elif command == 'patrons':
+            print('Patrons: ')
+            for patron in patronslist:
+                print(patron.name, patron.patron_id)
+        elif command == 'instock':
+            books_available = lib.books_available
+            for book in books_available:
+                print(book)
+        elif command == 'outstock':
+            books_unavailable = [object for object in books if object not in books_available]
+            for book in books_unavailable:
+                print(book)
+        elif command == 'add':
+            lib.add_book(input('Title: '), input('Author: '), input('Genre: '), True)
+        elif command == 'register':
+            lib.register_patron(input('Name: '), input('Id: '))
+        elif command == 'get':
+            cd.check_out(input("Name of the book you want to check out : "))
+        elif command == 'return':
+            cd.return_book(input("Name of the book you want to return: "))
+        else:
+            print("Invalid input")
+        command = display_commands()
 
 
 if __name__ == '__main__':
