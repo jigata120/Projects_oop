@@ -142,13 +142,31 @@ class Order(Cart):
         self.timestamp = timestamp
 
 
+class Payment(Cart):
+    def __init__(self, payment_id, buyer_id, items, total_amount, status, timestamp):
+        self.payment_id = payment_id
+        self.buyer_id = buyer_id
+        self.items = items
+        self.total_amount = total_amount
+        self.status = status
+        self.timestamp = timestamp
 
+    def __repr__(self):
+        return f'{self.items} - {self.status} - {self.total_amount}'
+class Search:
+    def __init__(self, search_term, product_name, category, price_range):
 
+        self.search_term = search_term
+        self.product_name = product_name
+        self.category = category
+        self.price_range = price_range
+    def __str__(self):
+        return f'{self.search_term} - {self.product_name} - {self.category} - {self.price_range}'
 
 
 cart = Cart()
 cart.add_to_the_cart(Product.register_prodict('table', 'table for kitchen', 121, 14))
-
+cart.add_to_the_cart(Product.register_prodict('chair', 'chair for living room', 31.49, 10))
 cart.add_to_the_cart(Product.register_prodict('falcon', 'falcon for painting', 31.49, 75))
 print(Product.products)
 print(cart)
