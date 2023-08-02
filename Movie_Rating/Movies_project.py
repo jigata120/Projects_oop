@@ -1,6 +1,10 @@
+# Class representing a Movie with its properties like title, genre, director, release_year, ratings, and average_rating.
+
 class Movie:
     # emojis = [✔,🎥,🎬,🎞,🌟,👤,👥,ℹ,]
     all_movies = []
+
+    # Constructor to initialize the Movie object with its properties.
 
     def __init__(self, title, genre, director, release_year, ratings):
         self.title = title
@@ -10,8 +14,12 @@ class Movie:
         self.ratings = ratings
         self.average_rating = sum(self.ratings) / len(self.ratings)
 
+    # Representation of the Movie object (used when printing the object).
+
     def __repr__(self):
         return f'{self.title}'
+
+    # Class method to calculate the average rating given a list of ratings.
 
     @classmethod
     def average_rating(cls, ratings):
@@ -23,10 +31,14 @@ class Movie:
         return f'\n🎥|{self.title}|🎥\n🎞Genre: {self.genre}\n🎬Director: {self.director}\n' \
                f'🕙Released {self.release_year} year.Rating: {self.average_rating:.1f}⭐'
 
+    # Class method to add a new movie to the list of all_movies.
+
     @classmethod
     def add_movie(cls, title, genre, director, release_year, ratings: list):
         movie = Movie(title, genre, director, release_year, ratings)
         Movie.all_movies.append(movie)
+
+    # Class method to find a movie by its title in the list of all_movies.
 
     @classmethod
     def find_movie(cls, name):
@@ -35,9 +47,12 @@ class Movie:
                 return movie
 
 
+# Class representing a User with their properties like name, age, rated_movies, movie_for_recommend, and movies_to_recommend.
 class User:
-    users = []
-    current_user = None
+    users = []  # List to store all user objects.
+    current_user = None  # To keep track of the current user.
+
+    # Constructor to initialize the User object with its properties.
 
     def __init__(self, name, age):
         self.name = name
@@ -46,11 +61,15 @@ class User:
         self.movie_for_recommend = None
         self.movies_to_recommend = []
 
+    # Class method to register a new user and set them as the current_user.
+
     @classmethod
     def register(cls, name, age):
         user_object = User(name, age)
         User.users.append(user_object)
         User.current_user = user_object
+
+    # Method to rate a movie, add the rating to the movie's ratings, and update the average rating.
 
     def rate_movie(self, rated_movie, rate):
         self.rated_movies.append({"movie": rated_movie, 'rate': rate})
@@ -58,6 +77,8 @@ class User:
         print('Results:')
         print(rated_movie)
         return f'\n👤✅Submitted rating: {rate:.1f}🌟\n✅New rating: 🎥|{rated_movie.title}|🎥-{rated_movie.average_rating:.1f}⭐'
+
+    # Method to recommend movies based on the user's last rated movie's genre.
 
     def recommended(self):
         self.movies_to_recommend = []
@@ -68,6 +89,8 @@ class User:
                     self.movies_to_recommend.append(object)
             return f'\n🔻Recommendations that you might like🔻\n\n' + '\n'.join(
                 [f'🎥|{movie.title}|🎥- {movie.average_rating:.1f}⭐' for movie in self.movies_to_recommend])
+
+    # Method to calculate similarity scores between two users based on rated movies.
 
     def similarity_scores(self, user_to_compare):
         usernames = [user.name for user in User.users]
@@ -87,9 +110,16 @@ class User:
 
                         similarity_percentage = (len(common_titles) / len(list1)) * 100
                         return round(similarity_percentage)
+
                     return f"Your profile is {calculate_similarity(using.rated_movies, user.rated_movies)}% similar to {user.name}'s"
+
+    # String representation of the User object.
+
     def __repr__(self):
         return f'{self.name}'
+
+    # String representation of the User object.
+
     def __str__(self):
         if self.rated_movies:
             result = '\n'.join([f'{object["movie"].title}-{object["rate"]}🌟'
@@ -98,6 +128,10 @@ class User:
             result = f'You have not rated any movies yet.'
         profile = f'\n👥Profile:\n👤{self.name}({self.age}y.o)👤\n🔻Rated movies🔻\n' + result
         return profile
+
+
+# Adding some movies to the Movie class using the add_movie method.
+
 Movie.add_movie("The Shawshank Redemption", "Drama", "Frank Darabont", 1994, [9.3, 9.2, 9.3, 9.3, 9.4])
 Movie.add_movie("The Godfather", "Crime", "Francis Ford Coppola", 1972, [9.2, 9.3, 9.2, 9.4, 9.3])
 Movie.add_movie("The Dark Knight", "Action", "Christopher Nolan", 2008, [9.0, 9.1, 9.2, 9.4, 9.3])
@@ -128,6 +162,8 @@ using.rate_movie(Movie.all_movies[0], 7.4)
 using.rate_movie(Movie.all_movies[1], 5.9)
 using.rate_movie(Movie.all_movies[2], 7.7)
 
+
+# Function to display available commands and retrieve user input.
 
 def display_commands():
     command = input('command: ')
