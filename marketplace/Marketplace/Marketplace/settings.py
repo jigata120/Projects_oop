@@ -55,7 +55,7 @@ ROOT_URLCONF = 'Marketplace.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['market'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
