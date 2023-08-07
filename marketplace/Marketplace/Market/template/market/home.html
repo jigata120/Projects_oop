@@ -63,7 +63,7 @@
       text-align: center;
     }
   </style>
->>>>>>> origin/master:marketplace/Marketplace/Market/template/home.html
+
 </head>
 <body>
   <header>
@@ -76,11 +76,12 @@
       <!-- Display your product listings here -->
       {% for product in products %}
         <div class="product">
-          <img src="product1.jpg" alt="Product 1">
+          <img src="{{ product.image }}" alt="{{ product.name }}">
+
           <h2>{{product.name}}</h2>
           <p>{{product.description}}.</p>
           <p>{{product.price}}</p>
-          <p >posted by: {{product.seller}}</p>
+          <p >posted by: {{product.seller.username}}</p>
           <button>Add to Cart</button>
         </div>
       {% endfor %}
