@@ -1,9 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProductForm
 from .models import *
 from django.urls import reverse
-
-# Create your views here.
 
 
 def create_product(request):
@@ -16,14 +14,15 @@ def create_product(request):
         form = ProductForm()
     return render(request, 'template/market/create_product.html', {'form': form})
 
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    return render(request, 'template/market/product_details.html', {'product': product})
+
+
 def home(request):
     products = Product.objects.all()
-    cart = Cart.objects.all()
-
-
-
-
-    return render(request, 'template/market/home.html', {'products': products, 'cart': cart, 'all': all})
+    return render(request, 'template/market/home.html', {'products': products, })
 
 
 def about(request):
