@@ -10,6 +10,9 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #551a8b;
+      color: #333
+
     }
 
     header {
@@ -17,14 +20,50 @@
       color: #fff;
       padding: 1rem;
       text-align: center;
+      border: 2px solid #666;
     }
+    div {
+      width: 85%;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 2px solid #666;
+      border-radius: 25px;
+      background-color:#fff ;
+      color: #333;
 
+    }
     main {
       display: flex;
       justify-content: space-between;
       padding: 2rem;
     }
+    label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    }
 
+    input, select {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        margin-top: 0.25rem;
+    }
+
+    button {
+        margin-top: 1rem;
+        background-color: #551a8b;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #713dba;
+    }
     .product-listing {
       flex: 2;
       display: grid;
@@ -101,7 +140,9 @@
       <!-- Display your product listings here -->
       {% for product in products %}
         <div class="product">
-          <img src="{{ product.image }}" alt="{{ product.name }}">
+          <a href="{% url 'product_detail' product.id %}">
+            <img src="{{ product.image }}" alt="{{ product.name }}">
+          </a>
           <h2>{{ product.name }}</h2>
           <p>{{ product.description }}</p>
           <p>Price: ${{ product.price }}</p>
