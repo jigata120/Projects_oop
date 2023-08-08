@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2e2e2e;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .product-details {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #3e3e3e;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .product-details img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .product-details p {
+            margin: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-details a {
+            color: #6a00c2;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+    <div class="product-details">
+        <img src="{{ product.image }}" alt="{{ product.name }}">
+        <p>{{ product.description }}</p>
+        <p>Price: ${{ product.price }}</p>
+        <p>Quantity: {{ product.quantity }}</p>
+        <p>Posted by: {{ product.seller.username }}</p>
+        <!-- You can add more details as needed -->
+
+        <a href="{% url 'home' %}">Back to Products</a>
+    </div>
+</body>
+</html>
