@@ -31,7 +31,7 @@ class Product(models.Model):
 
 class Cart(models.Model):
     buyer = models.ForeignKey(User, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product, related_name='products')
+    products = models.ManyToManyField(Product, related_name='products', blank=True)
 
     def __str__(self):
         return f'{self.buyer} - {self.products}'
