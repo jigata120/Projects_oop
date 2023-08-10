@@ -7,8 +7,20 @@ from django.http import HttpResponse
 
 def add_to_cart(request, product_id):
     # Logic to add product to cart
-    response_data = {'message': 'Product added to cart'}
+    cart = Cart.objects.all()
+    cart1 = cart.first()
+    cart = cart1.products
+    product = get_object_or_404(Product, pk=product_id)
+    cart.add(product)
+    cart1.save()
+    return redirect('home')
 
+
+def cart_price(cart_objects):
+    final_price = 0
+    for product in cart_objects:
+        final_price += product.price
+    return final_price
 
 
 def create_product(request):
@@ -29,13 +41,16 @@ def product_detail(request, product_id):
 
 def delete_product(request, product_id):
     return HttpResponse(f"Product {product_id} has been deleted")
-#def add_to_cart(request, product_id):
-#    return HttpResponse(f"Product {product_id} has been added to cart")
 
 
 def home(request):
     products = Product.objects.all()
-    return render(request, 'template/market/home.html', {'products': products, })
+    cart = Cart.objects.all()
+    cart = cart.first()
+    cart = cart.products.all()
+    total_price = cart_price(cart)
+    return render(request, 'template/market/home.html',
+                  {'products': products, 'cart': cart, 'total_price': total_price})
 
 
 def about(request):
