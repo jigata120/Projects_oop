@@ -5,6 +5,15 @@ from django.urls import reverse
 from django.http import HttpResponse
 
 
+def delete_product(request, product_id):
+    cart = Cart.objects.all()
+    cart1 = cart.first()
+    cart = cart1.products
+    product = get_object_or_404(Product, pk=product_id)
+    cart.remove(product)
+    return redirect('home')
+
+
 def add_to_cart(request, product_id):
     # Logic to add product to cart
     cart = Cart.objects.all()
@@ -37,10 +46,6 @@ def create_product(request):
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     return render(request, 'template/market/product_details.html', {'product': product})
-
-
-def delete_product(request, product_id):
-    return HttpResponse(f"Product {product_id} has been deleted")
 
 
 def home(request):
