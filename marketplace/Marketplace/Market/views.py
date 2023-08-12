@@ -3,7 +3,7 @@ from .forms import ProductForm
 from .models import *
 from django.urls import reverse
 from django.http import HttpResponse
-
+from django.contrib.auth.decorators import login_required
 
 def delete_product(request, product_id):
     cart = Cart.objects.all()
@@ -31,7 +31,7 @@ def cart_price(cart_objects):
         final_price += product.price
     return final_price
 
-
+@login_required
 def create_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -47,7 +47,7 @@ def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     return render(request, 'template/market/product_details.html', {'product': product})
 
-
+@login_required
 def home(request):
     products = Product.objects.all()
     cart = Cart.objects.all()
