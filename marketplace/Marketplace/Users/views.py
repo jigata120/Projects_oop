@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login, logout
-
+from Market.models import Cart
 
 # Create your views here.
 def register(request):
@@ -14,6 +14,9 @@ def register(request):
 
         user = User.objects.create_user(username=username, password=password, email=email,)
         user.save()
+        cart = Cart.objects.create(buyer=user)
+        cart.save()
+
         return redirect('login')
     else:
         return render(request, 'Usertemplate/Users/register.html')
