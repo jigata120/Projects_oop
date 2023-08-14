@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marketplace App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
   <style>
     /* General styles */
     body {
@@ -210,6 +212,7 @@
     .cart-dropdown:hover {
       display: block;
     }
+
   </style>
 </head>
 <body>
@@ -220,6 +223,7 @@
       <a href="#">About</a>
       <a href="#">Products</a>
       <a href="{% url 'create_product' %}">Add product</a>
+      <a href="{% url 'logout' %}">Log Out</a>
       <!-- Add more menu items as needed -->
     </div>
     <!-- Add navigation or user profile links here -->
@@ -244,6 +248,11 @@
             <button type="button">
               <a href ="{% url 'add_to_cart' product.id%}">Click here!</a>
             </button>
+            {% if product.seller == request.user %}
+                <a href="{% url 'edit_product' product.id %}"  class="edit-button">
+                  <i class="fas fa-edit"></i> Edit
+                </a>
+            {% endif %}
           </div>
         {% endfor %}
 
