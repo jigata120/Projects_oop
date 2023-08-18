@@ -201,7 +201,7 @@
       position: fixed;
       top: 50px;
       right: 20px;
-      width: 350px;
+      width: 400px;
       background-color: #f9f9f9;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       padding: 10px;
@@ -212,7 +212,13 @@
     .cart-dropdown:hover {
       display: block;
     }
-
+   #out-of-stock {
+    color: #ff0000; /* Red color for visibility */
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10px;
+  }
   </style>
 </head>
 <body>
@@ -245,9 +251,13 @@
             <p>{{ product.description }}</p>
             <p>Price: ${{ product.price }}</p>
             <p>Posted by: {{ product.seller.username }}</p>
-            <button type="button">
-              <a href ="{% url 'add_to_cart' product.id%}">Click here!</a>
-            </button>
+            {% if product.quantity > 0 %}
+              <button type="button">
+                <a href ="{% url 'add_to_cart' product.id%}">Click here!</a>
+              </button>
+            {% else %}
+              <p id="out-of-stock">Out of stock</p>
+            {% endif %}
             {% if product.seller == request.user %}
                 <a href="{% url 'edit_product' product.id %}"  class="edit-button">
                   <i class="fas fa-edit"></i> Edit
