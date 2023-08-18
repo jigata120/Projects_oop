@@ -23,6 +23,8 @@ def delete_product_from_cart(request, product_id):
     cart1 = get_object_or_404(Cart, buyer=request.user)
     cart = cart1.products
     product = get_object_or_404(Product, pk=product_id)
+    product.quantity += 1
+    product.save()
     cart.remove(product)
     return redirect('home')
 
@@ -38,6 +40,8 @@ def add_to_cart(request, product_id):
     cart1 = get_object_or_404(Cart, buyer=request.user)
     cart = cart1.products
     product = get_object_or_404(Product, pk=product_id)
+    product.quantity -= 1
+    product.save()
     cart.add(product)
     cart1.save()
     return redirect('home')
