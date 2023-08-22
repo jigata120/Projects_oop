@@ -1,18 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lobby</title>
-
-  <script src='custom.js'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamer Lobby</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Lobby</h1>
-    <button type="button" >click</button>
-
-    <button onclick="location.href='{% url 'create_product' %}'">click</button>
-
-
+    <div class="lobby-container">
+        <div class="lobby-content">
+            <h1>Welcome to Gamer's Paradise</h1>
+            <p>Your go-to place for gaming gear and accessories.</p>
+            <button class="start-button">Start Now</button>
+            <div class="auth-buttons">
+                <a href="{% url 'login' %}" class="auth-button">Login</a>
+                <a href="{% url 'register' %}" class="auth-button">Register</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
