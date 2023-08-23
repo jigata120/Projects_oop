@@ -53,7 +53,8 @@ def delete_product_from_cart(request, product_id):
     product.save()
     cart.remove(product)
     return redirect('home')
-
+def custom_404_view(request, exception):
+    return render(request, 'custom_404.html', status=404)
 
 def delete_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
