@@ -19,9 +19,9 @@ def filter_products_by_price(request):
         return redirect('home')
     elif not min_price or not max_price:
         if not min_price:
-            min_price=0
+            min_price = 0
         else:
-            max_price=10000
+            max_price = 10000
 
     # Filter products by price range
     products_in_price_range = Product.objects.filter(price__gte=min_price, price__lte=max_price)
@@ -53,8 +53,11 @@ def delete_product_from_cart(request, product_id):
     product.save()
     cart.remove(product)
     return redirect('home')
+
+
 def custom_404_view(request, exception):
     return render(request, 'custom_404.html', status=404)
+
 
 def delete_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
@@ -87,8 +90,10 @@ def create_product(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             product = form.save(commit=False)
-            product.seller = request.user  # Set the seller to the logged-in user
-            product.save()
+            product.seller = request.user
+            if product.is_valid_product():  # Set the seller to the logged-in user
+                product.save()
+
             return redirect(reverse('home'))  # Redirect to a page showing the list of products
     else:
         form = ProductForm()
