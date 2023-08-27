@@ -2,13 +2,29 @@ from django.test import TestCase
 from .models import *
 from django.contrib.auth.models import User as AuthUser
 
+'''
+import os
+import pathlib
+import unittest
+
+from selenium import webdriver
+
+# Finds the Uniform Resourse Identifier of a file
+def file_uri(filename):
+    return pathlib.Path(os.path.abspath(filename)).as_uri()
+# Sets up web driver using Google chrome
+driver = webdriver.Chrome()
+'''
+
 
 class AppTest(TestCase):
     def setUp(self):
         auth_user = AuthUser.objects.create_user(
+
             username='seller',
             password='password',
             email='1@1.com', )
+        self.auth_user = auth_user
         self.product_valid = Product.objects.create(
             name='test_valid',
             description='Valid product',
@@ -52,6 +68,9 @@ class AppTest(TestCase):
             seller=auth_user,
             image='https://shorturl.at/ixW35'
         )
+
+    def test_for_existing_user(self):
+        self.assertIn(self.auth_user, AuthUser.objects.all())
 
     def test_valid_product(self):
         self.assertTrue(self.product_valid.is_valid_product())
