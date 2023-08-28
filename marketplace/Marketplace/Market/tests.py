@@ -86,3 +86,6 @@ class AppTest(TestCase):
 
     def test_negative_quantity_invalid_product(self):
         self.assertFalse(self.product_Negative_quantity.is_valid_product())
+
+   def test_not_valid_product(self):
+        self.assertFalse(self.product_negative_price.is_valid_product()) 
