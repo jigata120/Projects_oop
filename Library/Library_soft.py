@@ -35,8 +35,11 @@ class Library:
 
 
 class Search:
+    class Search:
     def search_for_available(self):
-        ...
+        available_books = [book for book in lib.books_available]
+        return available_books
+
 
     def search_for_book(self):
         ...
