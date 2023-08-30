@@ -35,14 +35,14 @@ class Library:
 
 
 class Search:
-    class Search:
     def search_for_available(self):
         available_books = [book for book in lib.books_available]
         return available_books
 
+    def search_for_book(self, title):
+        found_books = [book for book in lib.all_books if title.lower() in book.title.lower()]
+        return found_books
 
-    def search_for_book(self):
-        ...
 
 lib = Library()
 class Methods:
