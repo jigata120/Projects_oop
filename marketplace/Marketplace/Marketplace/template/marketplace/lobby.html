@@ -62,7 +62,9 @@
         <div class="lobby-content">
             <h1>Welcome to Gamer's Paradise</h1>
             <p>Your go-to place for gaming gear and accessories.</p>
-            <button class="start-button">Start Now</button>
+            <button class="start-button">
+                <a href="{% url 'home' %}" class="auth-button">Start Now</a>
+            </button>
             <div class="auth-buttons">
                 <a href="{% url 'login' %}" class="auth-button">Login</a>
                 <a href="{% url 'register' %}" class="auth-button">Register</a>
