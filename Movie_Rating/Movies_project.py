@@ -40,8 +40,7 @@ class Movie:
 
     # Class method to find a movie by its title in the list of all_movies.
 
-    @classmethod
-    def find_movie(cls, name):
+    def find_movie(self, name):
         for movie in Movie.all_movies:
             if name == movie.title:
                 return movie
