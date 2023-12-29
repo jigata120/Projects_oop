@@ -20,9 +20,9 @@ class Movie:
         return f'{self.title}'
 
     # Class method to calculate the average rating given a list of ratings.
-
-    @classmethod
-    def average_rating(cls, ratings):
+    
+    @staticmethod
+    def average_rating(self, ratings):
         average_rating = sum(ratings) / len(ratings)
         return average_rating
 
@@ -39,7 +39,7 @@ class Movie:
         Movie.all_movies.append(movie)
 
     # Class method to find a movie by its title in the list of all_movies.
-
+    @staticmethod
     def find_movie(self, name):
         for movie in Movie.all_movies:
             if name == movie.title:
